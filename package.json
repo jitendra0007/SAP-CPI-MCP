@@ -1,0 +1,21 @@
+{
+  "name": "sap-cpi-mcp-server",
+  "version": "1.1.0",
+  "description": "MCP Server for SAP Cloud Integration (CPI) OData V2 API - deployable on SAP BTP Cloud Foundry",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "axios": "^1.7.7",
+    "express": "^4.21.1",
+    "zod": "^3.23.8"
+  },
+  "keywords": ["mcp", "sap", "cpi", "cloud-integration", "btp"],
+  "license": "MIT"
+}

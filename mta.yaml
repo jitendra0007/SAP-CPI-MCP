@@ -1,0 +1,29 @@
+_schema-version: "3.1"
+ID: sap-cpi-mcp-server
+version: 1.0.0
+description: MCP Server for SAP Cloud Integration OData V2 API
+
+modules:
+  - name: sap-cpi-mcp-server
+    type: nodejs
+    path: .
+    parameters:
+      memory: 256M
+      disk-quota: 512M
+      instances: 1
+      health-check-type: http
+      health-check-http-endpoint: /health
+    properties:
+      MCP_TRANSPORT: http
+      NODE_ENV: production
+      CPI_TIMEOUT_MS: "30000"
+    requires:
+      - name: cpi-runtime-instance
+
+resources:
+  - name: cpi-runtime-instance
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: process-integration-runtime
+      service-plan: api          # 'api' plan gives OData API access
+      service-name: cpi-runtime-instance

@@ -1,0 +1,30 @@
+---
+applications:
+  - name: sap-cpi-mcp-server
+    memory: 256M
+    disk_quota: 512M
+    instances: 1
+    buildpacks:
+      - nodejs_buildpack
+    command: npm start
+    health-check-type: http
+    health-check-http-endpoint: /health
+    env:
+      NODE_ENV: production
+      MCP_TRANSPORT: http
+      # ── Option A: Basic Auth (uncomment & fill) ──────────────────────────
+      # CPI_BASE_URL: https://your-tenant.it-cpi001.cfapps.eu10.hana.ondemand.com
+      # CPI_USERNAME: your_user
+      # CPI_PASSWORD: your_password
+      #
+      # ── Option B: OAuth2 Client Credentials (uncomment & fill) ───────────
+      # CPI_BASE_URL: https://your-tenant.it-cpi001.cfapps.eu10.hana.ondemand.com
+      # CPI_CLIENT_ID: sb-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx!bNNNN|it-rt-your-tenant!bNNNN
+      # CPI_CLIENT_SECRET: your_secret
+      # CPI_TOKEN_URL: https://your-subaccount.authentication.eu10.hana.ondemand.com/oauth/token
+      #
+      # ── Option C: Bind a 'process-integration-runtime' service instance ──
+      # (no env vars needed — VCAP_SERVICES is auto-populated by CF)
+      CPI_TIMEOUT_MS: "30000"
+    # services:
+    #   - cpi-runtime-service   # name of your 'process-integration-runtime' service instance
